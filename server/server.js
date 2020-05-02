@@ -1,46 +1,38 @@
 var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
-var path = require('path');
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
-var mongoose = require('mongoose');
+var io = require('socket.io').listen(server);
+var port = process.env.PORT || 4001;
 
 server.listen(port, () => {console.log("server is running on port", server.address().port);});
+
 app.use(express.static('static'));
 
-mongoose.connect('mongodb://localhost/msgchat', {useNewUrlParser: true});
-var database = mongoose.connection;
-database.on('error', console.error.bind(console, 'database connection error:'));
-database.once('open', ()=> {
-   console.log("Database connected")
-});
+// Should get info in this format: {"fromUsr": currentUser, "toUsr": toUser, "txt": inputText}
 
-var messageSchema = new mongoose.Schema({
-   usr: String,
-   msg: String,
-   date: { type: Date, default: Date.now },
-});
+const chatroomName = (user1, user2) => {
+    let roomName = ""
+    if(user1 < user2){
+      roomName = `${user1}&${user2}`
+    } else {
+      roomName = `${user2}&${user1}`
+    };
+    return(roomName);
+  }
 
 io.on('connection', (socket) => {
-   var Messages = mongoose.model('Messages', messageSchema);
-   var query = Messages.find();
-   query.sort({date:-1});
-   query.limit(10);
-   query.exec((err, data) =>{
-      if (err) {return handleError(err);}
-      data.slice().reverse().forEach((current)=>{
-         io.emit('chat', ({'usr': current.usr, 'msg': current.msg}));
-      });
-   });
-   socket.on('chat', (data) => {
-      io.emit('chat',data);
-      username = data.usr;
-      chatitem = data.msg;
-      var newmsg = new Messages({usr: username, msg: chatitem});
-      newmsg.save(function (err) {
-         if (err) return handleError(err);
-      }); 
-   });
-   socket.on('type', (data) => {socket.broadcast.emit('type',data);});
+    socket.on('type', (data) => {
+        socket.broadcast.to(chatroomName(data.toUsr, data.fromUsr)).emit('type',data);
+        console.log(`${data.fromUsr} is typing ${data.txt} to ${data.toUsr} on room ${chatroomName(data.toUsr, data.fromUsr)}`);
+    });
+
+    socket.on('chat', (data) => {
+        console.log(`${data.fromUser} has chatted ${data.msg} to ${data.toUsr} on room ${chatroomName(data.toUsr, data.fromUsr)}`);
+        socket.broadcast.to(chatroomName(data.toUsr, data.fromUsr)).emit('chat',data);
+    });
+
+    socket.on('subscribe', (data) => {
+        console.log(data.room)
+        socket.join(data.room)
+    })
 });
