@@ -6,26 +6,10 @@ import SingleBox from './components/singlebox.js';
 const socket = openSocket('http://localhost:4001');
 socket.open();
 
-let dummychatList = [
-//  {chatID: 1, userID: 'user1', msg: 'Howdy'},
-//  {chatID: 2, userID: 'user1', msg: 'Doody'},
-//  {chatID: 3, userID: 'user2', msg: 'Hello'},
-];
-
-let dummyTypingData = [
-//  {userID: 'user1', txt: 'Typing this here...'},
-//  {userID: 'user2', txt: ''}
-];
-
-let dummyUserData = [
-// {userID: 'user1', name: 'Tracey'},
-//  {userID: 'user2', name: 'Dave'}
-];
-
 function App() {
-    const [chatList, setChatList] = useState(dummychatList);
-    const [userList, setUserList] = useState(dummyUserData);
-    const [typingList, setTypingList] = useState(dummyTypingData);
+    const [chatList, setChatList] = useState([]);
+    const [userList, setUserList] = useState([]);
+    const [typingList, setTypingList] = useState([]);
     const [myUserName, setMyUserName] = useState("Guest")
 
     const sendChatData = (data) => {
