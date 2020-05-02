@@ -1,4 +1,4 @@
-
+//Pre react vanilla js code
 var socket = io();
 socket.connect('http://localhost:3000');
 //if we receive a chat message from the server then add it to the messages div
