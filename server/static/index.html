@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div class="input-area">
+ <br>
+ <h1 class="heading">Send Message</h1>
+ <br>
+ <input id = "name" class=”form-control” placeholder="Name">
+ <br>
+ <textarea id = "message" class="form-control" placeholder="Your Message Here">
+ </textarea>
+ <br>
+ <button id="send" class="btn btn-success" onclick="buttonclick()">Send</button>
+</div>
+<div class="message-area">
+ <div id="messages">
+ </div>
+ <div id="typing">
+ </div>
+</div>
+<script src="http://localhost:3000/socket.io/socket.io.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
