@@ -35,4 +35,9 @@ io.on('connection', (socket) => {
         console.log(data.room)
         socket.join(data.room)
     })
+
+    socket.on('invite', (data) => {
+      console.log(`Invite to ${data.invite} from ${data.from}`)
+      socket.broadcast.emit('invite', data)
+  })
 });
