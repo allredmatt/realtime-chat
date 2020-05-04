@@ -16,15 +16,14 @@ code {
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-template-rows: 400px;
   grid-gap: .5rem;
   align-items: flex-start;
 }
 
 .sub-grid {
   display: grid;
+  height: 400px;
   grid-template-columns: auto;
-  grid-template-rows: 1fr, 5fr 1fr 1fr;
   padding: 10px;
 }
 
