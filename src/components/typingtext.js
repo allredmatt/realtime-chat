@@ -7,7 +7,7 @@ const Typing = ({typingList, user}) => {
   );
 
   return (
-    <div style={{color: 'rgb(45, 206, 227)', backgroundColor: 'rgb(217, 84, 7)'}}>
+    <div className = 'typing-div'>
       <ul style={{listStyleType: 'none', paddingLeft: '10px'}}>{typingItems}</ul>
     </div>
   );

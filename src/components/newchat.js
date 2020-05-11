@@ -26,7 +26,7 @@ const AddNewChat = ({newUser}) => {
     //}, [tickPressed])
 
     return (
-        <div style={{backgroundColor: 'rgb(217, 84, 7)', height: '280px', padding: '150px 10px 10px 25px'}}>
+        <div className = 'new-chat'>
             {tickPressed ? (
                     <form ref = {formRef} onSubmit={formSubmit}>
                         <input type='text' value={textValue} autoFocus placeholder="Who to invite to chat?" onChange={handleChange}/>

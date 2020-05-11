@@ -17,8 +17,8 @@ const ChatWindow = ({currentUser, toUser, chatData, typingData, sendChatData, se
   }, [inputText, currentUser]);
 
   return (
-    <div className='sub-grid' style={{color: 'rgb(45, 206, 227)', backgroundColor: 'rgb(217, 84, 7)'}}>
-      <div>Chat with: {toUser}</div>
+    <div className='chat-window' >
+      <div>Chatting to {toUser}</div>
       <Messages messageList={chatData} user = {toUser} myUsername = {currentUser}/>
       <InputBar inputText={inputText} setInputText={setInputText} returnedVal={returnedVal} />
       <Typing typingList={typingData} user = {toUser}/>
