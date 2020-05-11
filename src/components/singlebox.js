@@ -13,9 +13,9 @@ const SingleBox = ({defaultText, returnFunction}) => {
     const handleChange = event => setTextValue(event.target.value)
 
     return (
-        <div className = 'center-div' style={{backgroundColor: 'rgb(217, 84, 7)', padding: '10px'}}>
+        <div style={{backgroundColor: 'rgb(217, 84, 7)', padding: '10px'}}>
             <form onSubmit={buttonSubmit}>
-                <input type='text' value={textValue} placeholder={defaultText} onChange={handleChange}/>
+                <input type='text' value={textValue} autoFocus placeholder={defaultText} onChange={handleChange}/>
             </form>
         </div>
     );

@@ -13,7 +13,7 @@ const Messages = ({messageList, user, myUsername}) => {
   useEffect(() => scrollToEnd(), [messageList]);
 
   return (
-    <div style={{color: 'rgb(217, 84, 7)', backgroundColor: 'rgb(45, 206, 227)', height:'286px', overflowY: 'scroll'}}>
+    <div className='message-list'>
       <ul style={{listStyleType: 'none', paddingLeft: '10px'}}>{messageItemsJX}</ul>
       <div ref={endOfMessages}></div>
     </div>

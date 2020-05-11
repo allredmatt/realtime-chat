@@ -8,9 +8,9 @@ const InputBar = ({inputText, setInputText, returnedVal}) => {
   };
   
   return (
-    <div style={{backgroundColor: 'rgb(217, 84, 7)', padding: '10px'}}>
+    <div className = 'input-bar'>
         <form onSubmit={buttonSubmit}>
-            <input type='text' value={inputText} placeholder="Message" onChange={(event)=>setInputText(event.target.value)}/>
+            <input type='text' value={inputText} autoFocus placeholder="Message" onChange={(event)=>setInputText(event.target.value)}/>
         </form>
     </div>
   );

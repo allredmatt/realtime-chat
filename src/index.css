@@ -1,16 +1,19 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(218, 55, 6);
+:root {
+  --main-bg-colour: rgb(0, 166, 255);
+  --window-bg-colour: rgb(255, 94, 0);
+  --message-bg-colour: rgb(7, 174, 204);
+  --head-text-colour: rgb(255, 255, 255);
+  --message-text-colour: rgb(255, 255, 255);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*rgb(15, 111, 255)*/
+
+body {
+  margin: 0;
+  font-family: serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--main-bg-colour);
 }
 
 .grid-container {
@@ -20,11 +23,13 @@ code {
   align-items: flex-start;
 }
 
-.sub-grid {
+.chat-window {
   display: grid;
   height: 400px;
   grid-template-columns: auto;
   padding: 10px;
+  color: var(--head-text-colour);
+  background-color: var(--window-bg-colour);
 }
 
 .center-page {
@@ -35,4 +40,27 @@ code {
   margin-left: -50px;
   width: 100px;
   height: 100px;
+}
+
+.message-list {
+  color: var(--message-text-colour);
+  background-color: var(--message-bg-colour);
+  height:286px;
+  overflow-y: scroll;
+}
+
+.typing-div {
+  color: var(--head-text-colour);
+  background-color: var(--window-bg-colour);
+}
+
+.input-bar {
+  background-color: var(--window-bg-colour);
+  padding: 10px;
+}
+
+.new-chat {
+  background-color: var(--window-bg-colour);
+  height: 280px;
+  padding: 130px 10px 10px 25px;
 }

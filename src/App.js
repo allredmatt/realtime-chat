@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import openSocket from 'socket.io-client';
 import ChatWindow from './components/chatwindow.js';
 import SingleBox from './components/singlebox.js';
+import AddNewChat from './components/newchat.js' 
 
 const socket = openSocket('http://localhost:4001');
 socket.open();
@@ -79,10 +80,25 @@ function App() {
     )
   }, [myUserName, userList]);
 
+  useEffect(()=>{
+    socket.on('invite', (data) => {
+      if (data.invite === myUserName){
+      if(window.confirm(`${data.from} would like to chat with you.`)) {addUser(data.from)};
+    }})
+    return () => {
+      socket.off('invite');
+    };
+  }, [myUserName, userList]);
+
   const addUser = (usrName) => {
     let newUserID = `user${userList.length + 1}`;
     setUserList(userList.concat({userID: newUserID, name: usrName}))
     return (newUserID)
+  }
+
+  const inviteUser = (usrName) => {
+    addUser(usrName);
+    socket.emit('invite', {invite: usrName, from: myUserName});
   }
 
   const chatWindowsJX = userList.map((user) => {
@@ -100,9 +116,7 @@ function App() {
   return (
     <>
       {myUserName === "Guest" ? <SingleBox defaultText = {"Please enter username"} returnFunction = {setMyUserName}/> : chatWindowsJX}
-      <div>
-        <SingleBox defaultText = {"Please enter username of someone to chat to:"} returnFunction = {addUser}/>
-      </div>
+      <AddNewChat newUser = {inviteUser} />
     </>
   )
 };
